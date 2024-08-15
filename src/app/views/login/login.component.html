@@ -1,0 +1,73 @@
+<div class="bg-primary w-full h-screen flex items-center justify-center">
+  <div
+    class="bg-secondary text-white p-9 rounded-xl w-full max-w-sm xs:max-w-xs"
+  >
+    <h1 class="text-3xl">Login</h1>
+    <form [formGroup]="userForm" class="mt-5" autocomplete="off">
+      <div class="flex flex-col">
+        <span class="mb-2">Username</span>
+        <input
+          type="text"
+          class="bg-dark border"
+          formControlName="username"
+          [ngClass]="{
+            'border-red-500':
+              userForm.controls.username.invalid &&
+              !userForm.controls.username.pristine,
+            'border-primary':
+              userForm.controls.username.valid ||
+              userForm.controls.username.pristine
+          }"
+        />
+
+        <div
+          *ngIf="
+            userForm.controls.username.invalid &&
+            !userForm.controls.username.pristine
+          "
+        >
+          <span
+            *ngFor="let error of getErrors('username')"
+            class="text-red-500 text-sm"
+          >
+            {{ error }}
+          </span>
+        </div>
+      </div>
+      <div class="flex flex-col mt-3">
+        <span>Password</span>
+        <input
+          type="password"
+          class="bg-dark border"
+          autocomplete="new-password"
+          formControlName="password"
+          [ngClass]="{
+            'border-red-500':
+              userForm.controls.password.invalid &&
+              !userForm.controls.password.pristine,
+            'border-primary':
+              userForm.controls.password.valid ||
+              userForm.controls.password.pristine
+          }"
+        />
+        <div
+          *ngIf="
+            userForm.controls.password.invalid &&
+            !userForm.controls.password.pristine
+          "
+        >
+          <span
+            *ngFor="let error of getErrors('password')"
+            class="text-red-500 text-sm"
+          >
+            {{ error }}
+          </span>
+        </div>
+      </div>
+      <button class="w-full my-9" [disabled]="userForm.invalid">Login</button>
+      <span
+        >Don't have an account? <a href="" class="text-gray">Sign Up</a></span
+      >
+    </form>
+  </div>
+</div>
